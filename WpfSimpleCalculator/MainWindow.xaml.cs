@@ -148,8 +148,9 @@ namespace WpfSimpleCalculator
             displayZone.Text = sb.ToString() ;
         }
 
-        private void Window_KeyUp(object sender, KeyEventArgs e)
+        private void MainWindow_KeyUp(object sender, KeyEventArgs e)
         {
+            //does not work if window not in focus
             if ((e.Key == Key.D1) || (e.Key == Key.NumPad1))
             {
                 sb.Append("1");
