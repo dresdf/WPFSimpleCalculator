@@ -5,18 +5,18 @@
     <Grid Name="mainGrid">
         <Grid Name="calculatorGrid">
             <StackPanel Orientation="Vertical">
-                <TextBlock x:Name="displayZone" TextWrapping="Wrap" Text="0." Margin="20,10,20,10" TextAlignment="Right"/>
+                <TextBlock x:Name="displayZone" TextWrapping="Wrap" Text="" Margin="20,10,20,10" TextAlignment="Right"/>
 
             </StackPanel>
             
             <Grid Name="buttonsGrid">
                 <!--function-->
-                <Button Content="CE" HorizontalAlignment="Left" Margin="21,119,0,0" VerticalAlignment="Top" Width="75"/>
-                <Button Content="C" HorizontalAlignment="Left" Margin="101,119,0,0" VerticalAlignment="Top" Width="75"/>
-                <Button Content="M" HorizontalAlignment="Left" Margin="181,119,0,0" VerticalAlignment="Top" Width="75"/>
-                <Button Content="+/-" HorizontalAlignment="Left" Margin="261,119,0,0" VerticalAlignment="Top" Width="75"/>
-                <Button Content="Backspace" HorizontalAlignment="Left" Margin="341,119,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
-                <Button Content="%" HorizontalAlignment="Left" Margin="341,144,0,0" VerticalAlignment="Top" Width="75"/>
+                <Button Name="clearAllButton" Content="CE" HorizontalAlignment="Left" Margin="21,119,0,0" VerticalAlignment="Top" Width="75" Click="clearAllButton_Click"/>
+                <Button Name="clearButton" Content="C" HorizontalAlignment="Left" Margin="101,119,0,0" VerticalAlignment="Top" Width="75" Click="clearButton_Click"/>
+                <Button Name="memoryButton" Content="M" HorizontalAlignment="Left" Margin="181,119,0,0" VerticalAlignment="Top" Width="75"/>
+                <Button Name="changeSignButton" Content="+/-" HorizontalAlignment="Left" Margin="261,119,0,0" VerticalAlignment="Top" Width="75"/>
+                <Button Name="Backspace" Content="Backspace" HorizontalAlignment="Left" Margin="341,119,0,0" VerticalAlignment="Top" Width="75" Click="Backspace_Click"/>
+                <Button Name="percentButton" Content="%" HorizontalAlignment="Left" Margin="341,144,0,0" VerticalAlignment="Top" Width="75"/>
 
                 <!--operations-->
                 <Button Name="divisionButton" Content="/" HorizontalAlignment="Left" Margin="261,144,0,0" VerticalAlignment="Top" Width="75" Click="divisionButton_Click"/>
