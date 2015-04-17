@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace WpfSimpleCalculator
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         StringBuilder sb = new StringBuilder();
@@ -33,6 +30,7 @@ namespace WpfSimpleCalculator
 
         }
 
+        //input
         private void updateDisplay(string input)
         {
             if (!opEnd)
@@ -43,13 +41,14 @@ namespace WpfSimpleCalculator
             else
             {
                 sb.Clear();
+                opEnd = false;
                 sb.Append(input);
                 displayZone.Text = sb.ToString();
-                opEnd = false;
 
             }
         }
 
+        //insert operation
         private void calculate(string operation)
         {
             if (!sb.ToString().Contains("/") && !sb.ToString().Contains("*") && !sb.ToString().Contains("-") && !sb.ToString().Contains("+"))
@@ -61,6 +60,39 @@ namespace WpfSimpleCalculator
 
         }
 
+        //perform calculations and signal the end of the operation
+        private void getResult()
+        {
+            if (!String.IsNullOrEmpty(op))
+            {
+                int opIndex = sb.ToString().IndexOf(op);
+                secondOperand = decimal.Parse(sb.ToString().Substring(opIndex + 1));
+                decimal result;
+                switch (op)
+                {
+                    case "/":
+                        result = firstOperand / secondOperand;
+                        updateDisplay("=" + result.ToString("F"));
+                        break;
+                    case "*":
+                        result = firstOperand * secondOperand;
+                        updateDisplay("=" + result.ToString("F"));
+                        break;
+                    case "-":
+                        result = firstOperand - secondOperand;
+                        updateDisplay("=" + result.ToString());
+                        break;
+                    case "+":
+                        result = firstOperand + secondOperand;
+                        updateDisplay("=" + result.ToString());
+                        break;
+                }
+                op = "";
+                opEnd = true;
+            }
+
+
+        }
 
         #region function buttons click events
         private void Backspace_Click(object sender, RoutedEventArgs e)
@@ -76,7 +108,6 @@ namespace WpfSimpleCalculator
             displayZone.Text = sb.ToString();
         }
 
-        //clear all input
         private void clearAllButton_Click(object sender, RoutedEventArgs e)
         {
             sb.Clear();
@@ -85,30 +116,6 @@ namespace WpfSimpleCalculator
             op = "";
             opEnd = false;
             displayZone.Text = sb.ToString();
-
-        }
-
-        //clear last operand
-        private void clearButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (sb.ToString().Contains("/") || sb.ToString().Contains("*") || sb.ToString().Contains("-") || sb.ToString().Contains("+"))
-            {
-                int opIndex = sb.ToString().IndexOf(op);
-                string tempVal = sb.ToString().Remove(opIndex + 1);
-                sb.Clear();
-                sb.Append(tempVal);
-                displayZone.Text = sb.ToString();
-            }
-            else
-            {
-                sb.Clear();
-                firstOperand = 0;
-                secondOperand = 0;
-                op = "";
-                displayZone.Text = sb.ToString();
-
-            }
-
 
         }
 
@@ -137,31 +144,7 @@ namespace WpfSimpleCalculator
 
         private void equalButton_Click(object sender, RoutedEventArgs e)
         {
-            //TODO: check if operation was selected before doing equal function to avoid exception
-            int opIndex = sb.ToString().IndexOf(op);
-            secondOperand = decimal.Parse(sb.ToString().Substring(opIndex + 1));
-            decimal result;
-            switch (op)
-            {
-                case "/":
-                    result = firstOperand / secondOperand;
-                    updateDisplay("=" + result.ToString("F"));
-                    break;
-                case "*":
-                    result = firstOperand * secondOperand;
-                    updateDisplay("=" + result.ToString("F"));
-                    break;
-                case "-":
-                    result = firstOperand - secondOperand;
-                    updateDisplay("=" + result.ToString());
-                    break;
-                case "+":
-                    result = firstOperand + secondOperand;
-                    updateDisplay("=" + result.ToString());
-                    break;
-            }
-            op = "";
-            opEnd = true;
+            getResult();
         }
         #endregion
 
@@ -229,9 +212,8 @@ namespace WpfSimpleCalculator
 
 
 
-        //insert numbers with the keyboard or keypad
-        //does not work if window not in focus
-        //TODO: make events for all keys
+        ////allow input from the keyboard
+        ////event does not trigeer if window not in focus
         private void MainWindow_KeyUp(object sender, KeyEventArgs e)
         {
             if ((e.Key == Key.D0) || (e.Key == Key.NumPad0))
@@ -284,7 +266,7 @@ namespace WpfSimpleCalculator
                 updateDisplay("9");
                 return;
             }
-            else if ((e.Key == Key.OemPeriod))
+            else if (e.Key == Key.OemPeriod || e.Key == Key.Decimal)
             {
                 if (!sb.ToString().Contains("."))
                 {
@@ -305,8 +287,39 @@ namespace WpfSimpleCalculator
                 }
                 displayZone.Text = sb.ToString();
             }
+            else if (e.Key == Key.OemBackslash || e.Key == Key.Divide)
+            {
+                calculate("/");
+            }
+            else if (e.Key == Key.Multiply)
+            {
+                calculate("*");
+            }
+            else if (e.Key == Key.OemMinus || e.Key == Key.Subtract)
+            {
+                calculate("-");
+            }
+            else if (e.Key == Key.OemPlus || e.Key == Key.Add)
+            {
+                calculate("+");
+            }
+            else if (e.Key == Key.Enter || e.Key == Key.Return)
+            {
+                getResult();
+            }
+            else if (e.Key == Key.Delete)
+            {
+                sb.Clear();
+                firstOperand = 0;
+                secondOperand = 0;
+                op = "";
+                opEnd = false;
+                displayZone.Text = sb.ToString();
+
+            }
 
         }
+
 
 
 

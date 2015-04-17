@@ -1,42 +1,46 @@
 ﻿<Window x:Class="WpfSimpleCalculator.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="500" Width="500" KeyUp="MainWindow_KeyUp">
+        Title="MainWindow" Height="450" Width="450" KeyUp="MainWindow_KeyUp" ResizeMode="NoResize">
     <Grid Name="mainGrid">
         <Grid Name="calculatorGrid">
-            <StackPanel Orientation="Vertical">
-                <TextBlock x:Name="displayZone" TextWrapping="Wrap" Text="" Margin="20,10,20,10" TextAlignment="Right"/>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
 
-            </StackPanel>
-            
-            <Grid Name="buttonsGrid">
+            <TextBlock x:Name="displayZone" Grid.Row="0" TextWrapping="Wrap" Text="" Margin="20,5,20,5" TextAlignment="Right" VerticalAlignment="Bottom" Background="#FFF4F4DD">
+                <TextBlock.Style>
+                    <Style>
+                        <Setter Property="TextBlock.FontSize" Value="24" />
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+
+            <Grid Name="buttonsGrid" Grid.Row="1">
                 <!--function-->
-                <Button Name="clearAllButton" Content="CE" HorizontalAlignment="Left" Margin="21,119,0,0" VerticalAlignment="Top" Width="75" Click="clearAllButton_Click"/>
-                <Button Name="clearButton" Content="C" HorizontalAlignment="Left" Margin="101,119,0,0" VerticalAlignment="Top" Width="75" Click="clearButton_Click"/>
-                <Button Name="memoryButton" Content="M" HorizontalAlignment="Left" Margin="181,119,0,0" VerticalAlignment="Top" Width="75"/>
-                <Button Name="changeSignButton" Content="+/-" HorizontalAlignment="Left" Margin="261,119,0,0" VerticalAlignment="Top" Width="75"/>
-                <Button Name="Backspace" Content="Backspace" HorizontalAlignment="Left" Margin="341,119,0,0" VerticalAlignment="Top" Width="75" Click="Backspace_Click"/>
-                <Button Name="percentButton" Content="%" HorizontalAlignment="Left" Margin="341,144,0,0" VerticalAlignment="Top" Width="75"/>
+                <Button Name="clearAllButton" Content="CE" HorizontalAlignment="Left" Margin="70,21,0,0" VerticalAlignment="Top" Width="105" Click="clearAllButton_Click" Height="30"/>
+                <Button Name="Backspace" Content="Backspace" HorizontalAlignment="Left" Margin="262,21,0,0" VerticalAlignment="Top" Width="105" Click="Backspace_Click" Height="30"/>
 
                 <!--operations-->
-                <Button Name="divisionButton" Content="/" HorizontalAlignment="Left" Margin="261,144,0,0" VerticalAlignment="Top" Width="75" Click="divisionButton_Click"/>
-                <Button Name="multiplicationButton" Content="*" HorizontalAlignment="Left" Margin="261,169,0,0" VerticalAlignment="Top" Width="75" Click="multiplicationButton_Click"/>
-                <Button Name="subtractionButton" Content="-" HorizontalAlignment="Left" Margin="261,194,0,0" VerticalAlignment="Top" Width="75" Click="subtractionButton_Click"/>
-                <Button Name="additionButton" Content="+" HorizontalAlignment="Left" Margin="261,219,0,0" VerticalAlignment="Top" Width="75" Click="additionButton_Click"/>
-                <Button Name="equalButton" Content="=" HorizontalAlignment="Left" Margin="341,169,0,0" VerticalAlignment="Top" Width="75" Height="70" Click="equalButton_Click"/>
-                
+                <Button Name="divisionButton" Content="/" HorizontalAlignment="Left" Margin="317,78,0,0" VerticalAlignment="Top" Width="50" Click="divisionButton_Click" Height="50"/>
+                <Button Name="multiplicationButton" Content="*" HorizontalAlignment="Left" Margin="372,78,0,0" VerticalAlignment="Top" Width="50" Click="multiplicationButton_Click" Height="50"/>
+                <Button Name="subtractionButton" Content="-" HorizontalAlignment="Left" Margin="317,133,0,0" VerticalAlignment="Top" Width="50" Click="subtractionButton_Click" Height="50"/>
+                <Button Name="additionButton" Content="+" HorizontalAlignment="Left" Margin="372,133,0,0" VerticalAlignment="Top" Width="50" Click="additionButton_Click" Height="50"/>
+                <Button Name="equalButton" Content="=" HorizontalAlignment="Left" Margin="317,188,0,0" VerticalAlignment="Top" Width="105" Height="65" Click="equalButton_Click"/>
+
                 <!--numbers-->
-                <Button Name="oneButton" Content="1" HorizontalAlignment="Left" Margin="21,144,0,0" VerticalAlignment="Top" Width="75" Click="oneButton_Click"/>
-                <Button Name="twoButton" Content="2" HorizontalAlignment="Left" Margin="101,144,0,0" VerticalAlignment="Top" Width="75" Click="twoButton_Click"/>
-                <Button Name="threeButton" Content="3" HorizontalAlignment="Left" Margin="181,144,0,0" VerticalAlignment="Top" Width="75" Click="threeButton_Click"/>
-                <Button Name="fourButton" Content="4" HorizontalAlignment="Left" Margin="21,169,0,0" VerticalAlignment="Top" Width="75" Click="fourButton_Click"/>
-                <Button Name="fiveButton" Content="5" HorizontalAlignment="Left" Margin="101,169,0,0" VerticalAlignment="Top" Width="75" Click="fiveButton_Click"/>
-                <Button Name="sixButton" Content="6" HorizontalAlignment="Left" Margin="181,169,0,0" VerticalAlignment="Top" Width="75" Click="sixButton_Click"/>
-                <Button Name="sevenButton" Content="7" HorizontalAlignment="Left" Margin="21,194,0,0" VerticalAlignment="Top" Width="75" Click="sevenButton_Click"/>
-                <Button Name="eightButton" Content="8" HorizontalAlignment="Left" Margin="101,194,0,0" VerticalAlignment="Top" Width="75" Click="eightButton_Click"/>
-                <Button Name="nineButton" Content="9" HorizontalAlignment="Left" Margin="181,194,0,0" VerticalAlignment="Top" Width="75" Click="nineButton_Click"/>
-                <Button Name="zeroButton" Content="0" HorizontalAlignment="Left" Margin="21,219,0,0" VerticalAlignment="Top" Width="155" Click="zeroButton_Click"/>
-                <Button Name="decimalButton" Content="." HorizontalAlignment="Left" Margin="181,219,0,0" VerticalAlignment="Top" Width="75" Click="decimalButton_Click"/>
+                <Button Name="oneButton" Content="1" HorizontalAlignment="Left" Margin="23,78,0,0" VerticalAlignment="Top" Width="80" Click="oneButton_Click" Height="40"/>
+                <Button Name="twoButton" Content="2" HorizontalAlignment="Left" Margin="108,78,0,0" VerticalAlignment="Top" Width="80" Click="twoButton_Click" Height="40"/>
+                <Button Name="threeButton" Content="3" HorizontalAlignment="Left" Margin="193,78,0,0" VerticalAlignment="Top" Width="80" Click="threeButton_Click" Height="40"/>
+                <Button Name="fourButton" Content="4" HorizontalAlignment="Left" Margin="23,123,0,0" VerticalAlignment="Top" Width="80" Click="fourButton_Click" Height="40"/>
+                <Button Name="fiveButton" Content="5" HorizontalAlignment="Left" Margin="108,123,0,0" VerticalAlignment="Top" Width="80" Click="fiveButton_Click" Height="40"/>
+                <Button Name="sixButton" Content="6" HorizontalAlignment="Left" Margin="193,123,0,0" VerticalAlignment="Top" Width="80" Click="sixButton_Click" Height="40"/>
+                <Button Name="sevenButton" Content="7" HorizontalAlignment="Left" Margin="23,168,0,0" VerticalAlignment="Top" Width="80" Click="sevenButton_Click" Height="40"/>
+                <Button Name="eightButton" Content="8" HorizontalAlignment="Left" Margin="108,168,0,0" VerticalAlignment="Top" Width="80" Click="eightButton_Click" Height="40"/>
+                <Button Name="nineButton" Content="9" HorizontalAlignment="Left" Margin="193,168,0,0" VerticalAlignment="Top" Width="80" Click="nineButton_Click" Height="40"/>
+                <Button Name="zeroButton" Content="0" HorizontalAlignment="Left" Margin="23,213,0,0" VerticalAlignment="Top" Width="165" Click="zeroButton_Click" Height="40"/>
+                <Button Name="decimalButton" Content="." HorizontalAlignment="Left" Margin="193,213,0,0" VerticalAlignment="Top" Width="80" Click="decimalButton_Click" Height="40"/>
             </Grid>
 
 
